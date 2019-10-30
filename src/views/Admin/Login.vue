@@ -54,6 +54,8 @@
 						if (status) {
 							// 储存token
 							sessionStorage.token = data.token; //解构出的data的token赋值给sessionStorage.token
+							// 储存id
+							sessionStorage.id = data.id; //解构出的data的id赋值给sessionStorage.id
 							this.$message({
 								showClose: true,
 								message: msg,

@@ -9,7 +9,7 @@ let loading;
 axios.interceptors.request.use(function(config) {
 	loading = Loading.service({ background: 'rgba(0, 0, 0, 0.7)' });
 	// 注册||登录请求忽略
-	if (config.url == '/Admin/list' || config.url == '/Admin/register') { //解决注册或者登陆的时候会出现检测token
+	if (config.url == '/admin/login' || config.url == '/admin/register') { //解决注册或者登陆的时候会出现检测token
 		return config;
 	}
 	// 添加/获取token

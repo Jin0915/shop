@@ -5,24 +5,27 @@
 				<div slot="header" class="clearfix">
 					<span>商品列表</span>
 				</div>
-				<el-table :data="tableData" style="width: 100%" :default-sort="{prop: 'price', order: 'descending'}" >
-					<el-table-column prop="main_photo" width="150">
+				<el-table :data="tableData" :default-sort="{prop: 'price', order: 'descending'}">
+					<el-table-column label="商品名称" prop="img_md" width="150">
 						<template slot-scope="scope">
-							<img style="width: 30px; height: 30px;" :src="scope.row.main_photo" class="head_pic" />
+							<img style="width: 30px; height: 30px;" :src="scope.row.img_md" class="head_pic" />
 						</template>
 					</el-table-column>
-					<el-table-column fixed prop="name" label="商品名称" width="300" border-left='0'>
+					<el-table-column prop="name" width="200">
 					</el-table-column>
-
 					<el-table-column prop="price" label="价格" class="el-icon-d-caret" width="120" sortable></el-table-column>
 					<el-table-column prop="inventory" label="库存" width="120" sortable>
 					</el-table-column>
-					<el-table-column prop="create_time" label="发布时间" width="120" sortable>
+					<el-table-column prop="create_time" label="发布时间" width="100" sortable>
 					</el-table-column>
-					<el-table-column fixed="right" label="操作" width="100">
+					<el-table-column fixed="right" label="操作" width="150">
 						<template slot-scope="scope">
-							<el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-							<el-button type="text" size="small">编辑</el-button>
+							<el-button @click="handleClick(scope.row)" type="text" size="small">
+								<el-button type="primary" icon="el-icon-edit"></el-button>
+							</el-button>
+							<el-button @click="handleDelete(scope.row.id )" type="text" size="small">
+								<el-button type="danger" icon="el-icon-delete"></el-button>
+							</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -48,8 +51,29 @@
 		},
 		created() {
 			this.pullData();
+			// this.handleDelete(id);
 		},
 		methods: {
+			// 删除
+			async handleDelete(id) {
+				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(async () => {
+					let status = await Goods.remove({ id });
+					this.$message({
+						type: 'success',
+						message: '删除成功!'
+					});
+					this.pullData();
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '已取消删除'
+					});
+				});
+			},
 			// 合并列
 			arraySpanMethod({ row, column, rowIndex, columnIndex }) {
 				if (rowIndex % 2 === 0) {
@@ -76,7 +100,6 @@
 					this.currentPage = 1;
 					this.pullData();
 				}
-				console.log(goods)
 				this.tableData = goods;
 
 			},

@@ -11,7 +11,7 @@ import card from './modules/card/index' // index 可以省略 nodejs会进行找
 
 export default new Vuex.Store({ // 声明的参数  
 	state: {},
-	mutations: {},
+	mutations:  {},
 	actions: {}, // 可以拆分
 	getters: {},
 	modules: {

@@ -9,7 +9,7 @@ import menu from './modules/menu/index' // index 可以省略 nodejs会进行找
 import admin from './modules/admin/index' // index 可以省略 nodejs会进行找
 import card from './modules/card/index' // index 可以省略 nodejs会进行找
 
-export default new Vuex.Store({ // 声明的参数  
+export default new Vuex.Store({ // 声明的参数   这是最新的
 	state: {},
 	mutations: {},
 	actions: {}, // 可以拆分

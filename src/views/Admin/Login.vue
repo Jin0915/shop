@@ -4,7 +4,7 @@
 			<div class="title">登录</div>
 <!--			<div>我更改了这里</div>-->
 			<div class="bg-size">
-				<el-form ref="form" :model="user" :rules="rules">
+				<el-form ref="form"  :model="user" :rules="rules">
 					<el-form-item :span="10" label="账户" prop="username">
 						<el-input v-model="user.username" placeholder="请输入登录用户名"></el-input>
 					</el-form-item>
